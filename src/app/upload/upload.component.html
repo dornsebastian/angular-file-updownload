@@ -1,0 +1,26 @@
+<h2>Upload Files</h2>
+<div class="frame">
+
+  <input #file (change)="onFilesAdded()" multiple style="display: none" type="file"/>
+
+  <button (click)="addFiles()" class="btn btn-primary">
+    Add Files
+  </button>
+
+</div>
+
+<div class="list-group">
+  <button class="list-group-item list-group-item-action" *ngFor="let uploadFile of files">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{uploadFile.file.name}}</h5>
+    </div>
+    <div class="progress">
+      <div [attr.aria-valuenow]="uploadFile.status | async" [ngStyle]="{width: (uploadFile.status | async) + '%'}"
+           aria-valuemax="100"
+           aria-valuemin="0" class="progress-bar"
+           role="progressbar">
+        {{uploadFile.status | async}} %
+      </div>
+    </div>
+  </button>
+</div>
